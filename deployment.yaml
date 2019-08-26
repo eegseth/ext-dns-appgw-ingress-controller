@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgw-external-dns
+  labels:
+    app: appgw-external-dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appgw-external-dns
+  template:
+    metadata:
+      labels:
+        app: appgw-external-dns
+    spec:
+      serviceAccountName: external-dns
+      containers:
+      - name: appgw-external-dns
+        image: eegseth/appgw-external-dns:latest
+        env:
+        - name: subscriptionid
+          value: "azureSubscriptionId"
+        - name: resourcegroupname
+          value: "externaldns"
+        - name: zonename
+          value: "test.com"
+        - name: tenantid
+          value: "azureTenantId"
+        - name: clientid
+          value: "azureSpClientId"
+        - name: clientsecret
+          valueFrom:
+            secretKeyRef:
+              name: azure-client-secret
+              key: clientsecret
+        - name: applicationGatewayIp
+          value: "127.0.0.1"
