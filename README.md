@@ -2,7 +2,7 @@
 
 Updates Azure DNS with records from ingresses in kubernetes when using application gateway ingress controller as ingress controller.
 
-!!This is a proof-of-concept, it should be rewritten in Golang or something and the code should be cleaned up and get some better error-handeling implemented!!
+This is a POC!
 
 ## Why?
 Because https://github.com/kubernetes-incubator/external-dns does not currently work with https://github.com/Azure/application-gateway-kubernetes-ingress
